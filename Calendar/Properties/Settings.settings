@@ -9,10 +9,13 @@
       <Value Profile="(Default)">100, 100</Value>
     </Setting>
     <Setting Name="CalendarVisible" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CalendarPos" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">100, 200</Value>
+    </Setting>
+    <Setting Name="DigitalClockFlag" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -49,7 +49,7 @@ namespace Calendar.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CalendarVisible {
             get {
                 return ((bool)(this["CalendarVisible"]));
@@ -68,6 +68,18 @@ namespace Calendar.Properties {
             }
             set {
                 this["CalendarPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DigitalClockFlag {
+            get {
+                return ((bool)(this["DigitalClockFlag"]));
+            }
+            set {
+                this["DigitalClockFlag"] = value;
             }
         }
     }

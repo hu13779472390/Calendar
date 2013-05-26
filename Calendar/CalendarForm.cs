@@ -61,7 +61,7 @@ namespace Calendar
             var now = DateTime.Now;
             var start = (int)new DateTime(now.Year, now.Month, 1).DayOfWeek;
             var nowOfWeek = (int)now.DayOfWeek;
-            graphics.DrawRectangle(new Pen(Color.Black, 1), 10 + 30 * nowOfWeek, 10 + 30 * (start + now.Day - 1) / 7, 25, 25);
+            graphics.DrawRectangle(new Pen(Color.Black, 1), 10 + 30 * nowOfWeek, 10 + 30 * ((start + now.Day - 1) / 7), 25, 25);
 
             // 年・月の描画
             var font = new Font("メイリオ", 12);

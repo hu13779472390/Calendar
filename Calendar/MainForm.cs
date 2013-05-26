@@ -13,7 +13,7 @@ namespace Calendar
     class MainForm : Form
     {
         NotifyIcon notifyIcon;
-        ClockForm clockForm;
+        Form clockForm;
         CalendarForm calendarForm;
 
         public MainForm()
@@ -21,12 +21,21 @@ namespace Calendar
             // タスクトレイに格納
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Resources.Icon;
-            notifyIcon.Visible = true;
             notifyIcon.Text = "Clock";
 
             // コンテキストメニューを追加
-            MenuItem miExit = new MenuItem("終了(&X)");
-            miExit.Click += (seneder, e) => { Close(); };
+
+            MenuItem miDigital = new MenuItem("デジタル時計を使う(&D)");
+            miDigital.Click +=
+                (seneder, e) =>
+                {
+                    clockForm.Close();
+                    if (!Settings.Default.DigitalClockFlag) clockForm = new DigitalClockForm();
+                    else clockForm = new ClockForm();
+                    clockForm.Show();
+                    miDigital.Checked = !miDigital.Checked;
+                    Settings.Default.DigitalClockFlag = miDigital.Checked;
+                };
 
             MenuItem miClock = new MenuItem("時計を表示(&C)");
             miClock.Click += 
@@ -34,7 +43,9 @@ namespace Calendar
                 {
                     if (!miClock.Checked)
                     {
-                        clockForm = new ClockForm();
+                        if (Settings.Default.DigitalClockFlag) clockForm = new DigitalClockForm();
+                        else clockForm = new ClockForm();
+
                         clockForm.Show();
                     }
                     else clockForm.Close();
@@ -56,15 +67,21 @@ namespace Calendar
                     Settings.Default.CalendarVisible = miCalendar.Checked;
                 };
 
-            notifyIcon.ContextMenu = new ContextMenu(new MenuItem[] { miClock, miCalendar, miExit });
+            MenuItem miExit = new MenuItem("終了(&X)");
+            miExit.Click += (seneder, e) => { Close(); };
+
+            notifyIcon.ContextMenu = new ContextMenu(new MenuItem[] { miDigital, new MenuItem("-"), miClock, miCalendar, new MenuItem("-"), miExit });
 
             
             // 設定の表示フラグによってフォームを追加する
             this.Load += (sender, e) =>
             {
+                notifyIcon.Visible = true;
                 if (Settings.Default.ClockVisible)
                 {
-                    clockForm = new ClockForm();
+                    miDigital.Checked = Settings.Default.DigitalClockFlag;
+                    if (Settings.Default.DigitalClockFlag) clockForm = new DigitalClockForm();
+                    else clockForm = new ClockForm();
                     clockForm.Show();
                     miClock.Checked = true;
                 }
