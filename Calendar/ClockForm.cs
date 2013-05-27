@@ -75,7 +75,7 @@ namespace Calendar
             var second = dt.Second;
             DrawHand(graphics, new Pen(Color.Red, 1), 100, 100, 100, dt.Second / 60.0 * (Math.PI * 2) - Math.PI / 2);
             DrawHand(graphics, new Pen(Color.Black, 2), 100, 100, 80, dt.Minute / 60.0 * (Math.PI * 2) - Math.PI / 2);
-            DrawHand(graphics, new Pen(Color.Black, 4), 100, 100, 60, dt.Hour / 12.0 * (Math.PI * 2) - Math.PI / 2);
+            DrawHand(graphics, new Pen(Color.Black, 4), 100, 100, 60, (dt.Hour / 12.0 + dt.Minute / 60.0 / 12.0) * (Math.PI * 2) - Math.PI / 2);
 
             SetLayeredWindow(bitMap);
         }
